@@ -1,4 +1,3 @@
-// src/PokedexStart.jsx
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
@@ -35,7 +34,7 @@ const StartButton = styled.button`
   }
 `
 
-export default function PokedexStart() {
+export default function Home() {
   const navigate = useNavigate()
 
   const handleStart = () => {

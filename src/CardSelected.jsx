@@ -1,9 +1,8 @@
-// src/CardSelected.jsx
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import Card from './Card.jsx';
 import PokemonBall from './assets/Data/pokemon-ball.png';
-import Card from './Card';
+import { SelectedPokemonsContext } from './contexts/ContextPokemonAPI.jsx';
 
 const GridWrapper = styled.div`
   align-self: stretch;
@@ -44,18 +43,8 @@ const BallImage = styled.img`
   object-fit: contain;
 `;
 
-CardSelected.propTypes = {
-  selectedPokemons: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      imgUrl: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  onRemove: PropTypes.func.isRequired,
-};
-
-function CardSelected({ selectedPokemons, onRemove }) {
+export default function CardSelected() {
+  const { selectedPokemons } = useContext(SelectedPokemonsContext);
   const slots = Array.from({ length: 6 });
 
   return (
@@ -64,23 +53,21 @@ function CardSelected({ selectedPokemons, onRemove }) {
       <BallGrid>
         {slots.map((_, idx) => {
           const p = selectedPokemons[idx];
-
-          if (p) {
-            return (
-              <Card key={`selected-${p.id}`} id={p.id} name={p.name} imgUrl={p.imgUrl}
-                onRemove={() => onRemove(p.id)}/>
-            );
-          } else {
-            return (
-              <BallBox key={`slot-${idx}`}>
-                <BallImage src={PokemonBall} alt="Pokeball" />
-              </BallBox>
-            );
-          }
+          return p ? (
+            <Card
+              key={`selected-${p.id}`}
+              id={p.id}
+              name={p.name}
+              imgUrl={p.imgUrl}
+              action="remove"
+            />
+          ) : (
+            <BallBox key={`slot-${idx}`}>
+              <BallImage src={PokemonBall} alt="Pokeball" />
+            </BallBox>
+          );
         })}
       </BallGrid>
     </GridWrapper>
   );
 }
-
-export default CardSelected;

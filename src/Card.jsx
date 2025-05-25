@@ -1,8 +1,8 @@
-// src/Card.jsx
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { SelectedPokemonsContext } from './contexts/ContextPokemonAPI';
 
 const CardWrapper = styled.div`
   width: 80%;
@@ -47,30 +47,17 @@ const Button = styled.button`
   font-size: 1.2vh;
 `;
 
-Card.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired,
-  onAdd: PropTypes.func,
-  onRemove: PropTypes.func,
-};
-
-Card.defaultProps = {
-  onAdd: null,
-  onRemove: null,
-};
-
-function Card({ id, name, imgUrl, onAdd, onRemove }) {
+function Card({ id, name, imgUrl, action }) {
   const navigate = useNavigate();
+  const { addPokemon, removePokemon } = useContext(SelectedPokemonsContext);
 
-  const handleAddClick = (e) => {
-    e.stopPropagation();//클릭 이벤트 중단
-    if (onAdd) onAdd({ id, name, imgUrl });
-  };
-
-  const handleRemoveClick = (e) => {
-    e.stopPropagation();//클릭 이벤트 중단
-    if (onRemove) onRemove(id);
+  const handleActionClick = (e) => {
+    e.stopPropagation();
+    if (action === 'add') {
+      addPokemon({ id, name, imgUrl });
+    } else if (action === 'remove') {
+      removePokemon(id);
+    }
   };
 
   const handleNavigate = () => {
@@ -82,10 +69,24 @@ function Card({ id, name, imgUrl, onAdd, onRemove }) {
       <PokemonImage src={imgUrl} alt={name} />
       <PokemonName>{name}</PokemonName>
       <PokemonId>No. {id.toString().padStart(3, '0')}</PokemonId>
-      {onAdd && <Button onClick={handleAddClick}>추가</Button>}
-      {onRemove && <Button onClick={handleRemoveClick}>삭제</Button>}
+      {action && (
+        <Button onClick={handleActionClick}>
+          {action === 'add' ? '추가' : '삭제'}
+        </Button>
+      )}
     </CardWrapper>
   );
 }
+
+Card.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string.isRequired,
+  action: PropTypes.oneOf(['add', 'remove']),
+};
+
+Card.defaultProps = {
+  action: null,
+};
 
 export default Card;
