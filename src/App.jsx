@@ -1,10 +1,11 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Home.jsx'
-import Dex from './Dex.jsx'
-import CardDetail from './CardDetail.jsx'
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
-export default function App() {
+function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <BrowserRouter>
       <Routes>
@@ -15,3 +16,5 @@ export default function App() {
     </BrowserRouter>
   )
 }
+
+export default App
