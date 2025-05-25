@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { SelectedPokemonsProvider } from './contexts/ContextPokemonAPI.jsx';
-
 import Home from './Home.jsx';
 import Dex from './Dex.jsx';
 import CardDetail from './CardDetail.jsx';

@@ -45,8 +45,20 @@ const Button = styled.button`
   border-radius: 0.3rem;
   cursor: pointer;
   font-size: 1.2vh;
-`;
+  `;
 
+  Card.propTypes = {
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    imgUrl: PropTypes.string.isRequired,
+    action: PropTypes.oneOf(['add', 'remove']),
+  };
+  
+  Card.defaultProps = {
+    action: null,
+  };
+
+  
 function Card({ id, name, imgUrl, action }) {
   const navigate = useNavigate();
   const { addPokemon, removePokemon } = useContext(SelectedPokemonsContext);
@@ -78,15 +90,5 @@ function Card({ id, name, imgUrl, action }) {
   );
 }
 
-Card.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  imgUrl: PropTypes.string.isRequired,
-  action: PropTypes.oneOf(['add', 'remove']),
-};
-
-Card.defaultProps = {
-  action: null,
-};
 
 export default Card;

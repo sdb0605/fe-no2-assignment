@@ -21,13 +21,7 @@ export default function CardList() {
     <ListWrapper>
       <CardGrid>
         {MOCK_DATA.map((pokemon) => (
-          <Card
-            key={pokemon.id}
-            id={pokemon.id}
-            name={pokemon.korean_name}
-            imgUrl={pokemon.img_url}
-            action="add"
-          />
+          <Card key={pokemon.id} id={pokemon.id} name={pokemon.korean_name} imgUrl={pokemon.img_url} action="add"/>
         ))}
       </CardGrid>
     </ListWrapper>

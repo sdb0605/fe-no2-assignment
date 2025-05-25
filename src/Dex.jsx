@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ToastContainer } from 'react-toastify';
-
 import CardSelected from './CardSelected.jsx';
 import CardList from './CardList.jsx';
 

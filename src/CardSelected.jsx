@@ -54,18 +54,10 @@ export default function CardSelected() {
         {slots.map((_, idx) => {
           const p = selectedPokemons[idx];
           return p ? (
-            <Card
-              key={`selected-${p.id}`}
-              id={p.id}
-              name={p.name}
-              imgUrl={p.imgUrl}
-              action="remove"
-            />
-          ) : (
+            <Card key={`selected-${p.id}`} id={p.id} name={p.name} imgUrl={p.imgUrl} action="remove"/>) : (
             <BallBox key={`slot-${idx}`}>
               <BallImage src={PokemonBall} alt="Pokeball" />
-            </BallBox>
-          );
+            </BallBox>);
         })}
       </BallGrid>
     </GridWrapper>
