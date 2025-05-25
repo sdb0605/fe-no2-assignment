@@ -1,4 +1,3 @@
-// src/CardSelected.jsx
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -65,12 +64,12 @@ function CardSelected({ selectedPokemons, onRemove }) {
         {slots.map((_, idx) => {
           const p = selectedPokemons[idx];
 
-          if (p) {
+          if(p){
             return (
               <Card key={`selected-${p.id}`} id={p.id} name={p.name} imgUrl={p.imgUrl}
                 onRemove={() => onRemove(p.id)}/>
             );
-          } else {
+          }else {
             return (
               <BallBox key={`slot-${idx}`}>
                 <BallImage src={PokemonBall} alt="Pokeball" />
